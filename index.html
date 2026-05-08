@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JP Skills - Courses and Digital Classes</title>
+    <style>
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-width: 320px;
+        background: #020617;
+        color: #f8fafc;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: inherit; text-decoration: none; }
+      button, input, select, textarea { font: inherit; }
+      img { display: block; max-width: 100%; }
+      .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+      .site-nav {
+        position: sticky; top: 0; z-index: 20;
+        border-bottom: 1px solid rgba(255,255,255,.1);
+        background: rgba(2,6,23,.9); backdrop-filter: blur(18px);
+      }
+      .nav-inner {
+        width: min(1180px, calc(100% - 24px)); min-height: 68px; margin: 0 auto;
+        display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      }
+      .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 900; white-space: nowrap; }
+      .brand-mark {
+        display: grid; width: 42px; height: 42px; place-items: center; border-radius: 8px;
+        background: #22d3ee; color: #020617; font-weight: 950;
+      }
+      .nav-links {
+        display: flex; align-items: center; gap: 4px; padding: 5px;
+        border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: rgba(255,255,255,.06);
+      }
+      .nav-links a { border-radius: 999px; padding: 10px 16px; color: #cbd5e1; font-size: 14px; font-weight: 800; }
+      .nav-links a:hover { background: rgba(255,255,255,.1); color: #fff; }
+      .btn, .nav-cta {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+        border: 0; border-radius: 8px; padding: 12px 18px; font-weight: 900; line-height: 1.15; text-align: center;
+      }
+      .nav-cta { background: #bef264; color: #0f172a; font-size: 14px; }
+      .hero-section {
+        overflow: hidden; padding: 76px 0 72px;
+        background: radial-gradient(circle at 12% 12%, rgba(34,211,238,.22), transparent 34%), linear-gradient(135deg, #020617 0%, #0f172a 48%, #111827 100%);
+      }
+      .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 48px; }
+      .eyebrow, .section-kicker {
+        display: inline-flex; margin: 0 0 16px; border-radius: 999px; padding: 9px 14px;
+        font-size: 13px; font-weight: 900; text-transform: uppercase;
+      }
+      .eyebrow { border: 1px solid rgba(103,232,249,.35); background: rgba(34,211,238,.11); color: #cffafe; }
+      h1, h2 { margin: 0; font-weight: 950; letter-spacing: 0; line-height: 1.05; }
+      h1 { max-width: 780px; font-size: clamp(42px, 7vw, 72px); }
+      h2 { font-size: clamp(32px, 4vw, 48px); }
+      .hero-text, .section-text, .whatsapp-text { margin: 20px 0 0; max-width: 680px; color: #cbd5e1; font-size: 18px; line-height: 1.75; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+      .btn-primary { background: #22d3ee; color: #020617; }
+      .btn-secondary { border: 1px solid rgba(255,255,255,.16); color: #fff; }
+      .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 38px; }
+      .stat-card { min-height: 94px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 16px; background: rgba(255,255,255,.06); }
+      .stat-card div { color: #bef264; font-size: 28px; font-weight: 950; }
+      .stat-card span { display: block; margin-top: 5px; color: #94a3b8; font-size: 12px; font-weight: 900; text-transform: uppercase; }
+      .hero-visual { position: relative; }
+      .floating-note { position: absolute; top: 28px; right: -10px; z-index: 2; border-radius: 8px; padding: 12px 14px; background: #bef264; color: #0f172a; font-size: 14px; font-weight: 900; }
+      .image-frame { min-height: 330px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(255,255,255,.08); box-shadow: 0 30px 90px rgba(8,47,73,.38); }
+      .image-frame img { width: 100%; height: 100%; min-height: 330px; object-fit: cover; }
+      .mini-course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
+      .mini-course { border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 16px; background: rgba(15,23,42,.86); }
+      .mini-course p { margin: 0; color: #fff; font-weight: 900; }
+      .mini-course span { display: block; margin-top: 6px; color: #94a3b8; font-size: 14px; }
+      .services-section, .contact-section { padding: 72px 0; background: #f8fafc; color: #0f172a; }
+      .contact-section { background: #fff; }
+      .section-grid, .contact-grid, .whatsapp-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 36px; align-items: start; }
+      .section-kicker { background: #ecfeff; color: #0e7490; }
+      .section-kicker.light { background: rgba(190,242,100,.13); color: #bef264; }
+      .section-text { color: #475569; }
+      .language-list, .goal-tabs, .course-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .language-list span, .course-meta span { border: 1px solid #e2e8f0; border-radius: 999px; background: #fff; padding: 9px 13px; color: #334155; font-size: 14px; font-weight: 800; }
+      .recommend-card, .contact-form { border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; padding: 20px; box-shadow: 0 18px 45px rgba(15,23,42,.08); }
+      .goal-tabs button { border: 0; border-radius: 8px; background: #f1f5f9; color: #334155; padding: 11px 15px; font-size: 14px; font-weight: 900; cursor: pointer; }
+      .goal-tabs button.active { background: #0f172a; color: #fff; }
+      .recommended-course { margin-top: 20px; border-radius: 8px; background: #ecfeff; padding: 22px; }
+      .recommended-course > p:first-child { margin: 0 0 8px; color: #0e7490; font-size: 13px; font-weight: 900; text-transform: uppercase; }
+      .recommended-course h3, .course-card h3 { margin: 0; font-size: 24px; }
+      .recommended-course p, .course-card p { color: #475569; line-height: 1.65; }
+      .course-grid, .service-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+      .service-list { gap: 12px; margin-top: 28px; }
+      .course-card, .service-list div { border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; padding: 22px; }
+      .course-card div { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+      .course-card span { flex: 0 0 auto; border-radius: 999px; background: #ecfccb; padding: 6px 10px; color: #3f6212; font-size: 12px; font-weight: 900; }
+      .service-list div { color: #334155; font-weight: 850; }
+      .text-link { color: #0e7490; font-weight: 900; }
+      .admin-box { margin-top: 24px; border-radius: 8px; background: #0f172a; padding: 22px; }
+      .admin-box p { margin: 0; color: #bef264; font-size: 13px; font-weight: 900; text-transform: uppercase; }
+      .admin-box span { display: block; margin-top: 10px; color: #cbd5e1; line-height: 1.65; }
+      .contact-form, .whatsapp-card { display: grid; gap: 16px; }
+      .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      label span { display: block; margin-bottom: 8px; color: #334155; font-size: 14px; font-weight: 850; }
+      input, select, textarea { width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #0f172a; padding: 13px 14px; outline: none; }
+      textarea { resize: vertical; }
+      input:focus, select:focus, textarea:focus { border-color: #0891b2; box-shadow: 0 0 0 4px rgba(34,211,238,.18); }
+      .btn-dark { width: 100%; background: #0f172a; color: #fff; }
+      .whatsapp-section { padding: 72px 0; background: #020617; color: #fff; }
+      .whatsapp-text { color: #cbd5e1; }
+      .whatsapp-card { border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(255,255,255,.07); padding: 22px; }
+      .whatsapp-card label span { color: #e2e8f0; }
+      .whatsapp-card input, .whatsapp-card select, .whatsapp-card textarea { border-color: rgba(255,255,255,.14); background: #0f172a; color: #fff; }
+      .btn-whatsapp { width: 100%; background: #bef264; color: #0f172a; }
+      @media (max-width: 900px) {
+        .nav-links { display: none; }
+        .hero-grid, .section-grid, .contact-grid, .whatsapp-grid { grid-template-columns: 1fr; }
+        .course-grid, .service-list { grid-template-columns: repeat(2, 1fr); }
+        .floating-note { right: 12px; }
+      }
+      @media (max-width: 640px) {
+        .container { width: min(100% - 24px, 1180px); }
+        .brand span:last-child { display: none; }
+        .hero-section, .services-section, .contact-section, .whatsapp-section { padding: 48px 0; }
+        h1 { font-size: 40px; }
+        .hero-text, .section-text, .whatsapp-text { font-size: 16px; }
+        .hero-actions, .hero-actions .btn { width: 100%; }
+        .stats-grid, .mini-course-grid, .course-grid, .service-list, .form-row { grid-template-columns: 1fr; }
+        .floating-note { position: static; width: fit-content; margin-bottom: 12px; }
+        .image-frame, .image-frame img { min-height: 240px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <div class="nav-inner">
+        <a href="#home" class="brand"><span class="brand-mark">𝒥𝒫</span><span>JP Skills India PVT. LTD.</span></a>
+        <div class="nav-links">
+          <a href="#home">Home</a><a href="#services">Services</a><a href="#contact">Contact</a>
+        </div>
+        <a class="nav-cta" href="mailto:jpskillsweb@gmail.com">Admin panel</a>
+      </div>
+    </nav>
+
+    <main>
+      <section id="home" class="hero-section">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Skills for classes, career, business, and confidence</p>
+            <h1>Learn AI tools, web development, and communication with modern practical classes.</h1>
+            <p class="hero-text">JP Skills helps students and business owners build useful digital skills through simple courses, live guidance, Support, and website management training.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#services">Explore Courses</a>
+              <a class="btn btn-secondary" href="#contact">Contact for Admission</a>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card"><div>5+</div><span>course tracks</span></div>
+              <div class="stat-card"><div>6</div><span>learning languages</span></div>
+              <div class="stat-card"><div>1:1</div><span>guidance options</span></div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <!-- <div class="floating-note">WhatsApp automation ready</div> -->
+            <div class="image-frame"><img src="src/assets/hero.png" alt="JP Skills online class learning dashboard" /></div>
+            <div class="mini-course-grid" id="miniCourses"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="services-section">
+        <div class="container">
+          <div class="section-grid">
+            <div>
+              <p class="section-kicker">Services and courses</p>
+              <h2>Simple course tracks managed from clean data.</h2>
+              <p class="section-text">Choose a goal and the website recommends a course using a small matching algorithm. Course details, languages, and services are handled from one place.</p>
+              <div class="language-list" id="languages"></div>
+            </div>
+            <div class="recommend-card">
+              <div class="goal-tabs" id="goalTabs"></div>
+              <div class="recommended-course">
+                <p>Recommended course</p>
+                <h3 id="recommendedTitle">Web Development</h3>
+                <p id="recommendedSummary"></p>
+                <div class="course-meta"><span id="recommendedLevel"></span><span id="recommendedDuration"></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="course-grid" id="courseGrid"></div>
+          <div class="service-list" id="serviceList"></div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="container contact-grid">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2>Send inquiries directly to the admin email.</h2>
+            <p class="section-text">The contact form creates a ready email to send a mail to Admin email.</p>
+            <!-- <div class="admin-box"><p>Admin panel</p><span>Admissions and course inquiries are routed through email and WhatsApp.</span></div> -->
+          </div>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <label><span>Name</span><input id="contactName" type="text" placeholder="Student name" /></label>
+              <label><span>Email</span><input id="contactEmail" type="email" placeholder="student@email.com" /></label>
+            </div>
+            <label><span>Course</span><select id="contactCourse"></select></label>
+            <label><span>Message</span><textarea id="contactMessage" rows="5" placeholder="Tell us your timing, language, and learning goal."></textarea></label>
+            <a class="btn btn-dark" id="mailButton" href="mailto:jpskillsweb@gmail.com">Send the mail</a>
+          </form>
+        </div>
+      </section>
+
+      <section class="whatsapp-section">
+        <div class="container whatsapp-grid">
+          <div>
+            
+            <h2>One click opens WhatsApp by which all student filled details in given textbox.</h2>
+
+          </div>
+          <div class="whatsapp-card">
+            <div class="form-row">
+              <label><span>Name</span><input id="waName" placeholder="Full name" /></label>
+              <label><span>Language</span><select id="waLanguage"></select></label>
+            </div>
+            <label><span>Course</span><select id="waCourse"></select></label>
+            <label><span>Message</span><textarea id="waMessage" rows="4">Hello JP Skills, I want to know about your courses.</textarea></label>
+            <a class="btn btn-whatsapp" id="whatsappButton" target="_blank" rel="noreferrer">Open WhatsApp Chat</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const site = {
+        adminEmail: "jpskillsweb@gmail.com",
+        whatsappNumber: "+917272970006",
+        languages: ["English", "Hindi"],
+      };
+
+      const courses = [
+        { title: "AI Tools", level: "Beginner friendly", duration: "6 months", goal: "automation", summary: "Use modern AI tools for study, business, content, and daily work." },
+        { title: "Web Development", level: "Beginner to project", duration: "6 months", goal: "career", summary: "Learn HTML, CSS, JavaScript, React, hosting, and portfolio building." },
+        { title: "Communication Skills", level: "Practical speaking", duration: "3 months", goal: "confidence", summary: "Improve speaking, interviews, presentations, and workplace English." },
+        { title: "Website Making", level: "Launch ready", duration: "6 months", goal: "business", summary: "Build clean websites for shops, classes, freelancers, and services." },
+        { title: "Website Managing", level: "Maintenance skills", duration: "6 months", goal: "business", summary: "Update content, manage forms, improve speed, and handle basic SEO." },
+      ];
+
+      const services = ["Live classes", "Small batch mentorship", "Project based learning", "Mobile friendly notes", "WhatsApp doubt support", "Website setup guidance"];
+      const goals = [{ label: "Career", value: "career" }, { label: "Business", value: "business" }, { label: "Confidence", value: "confidence" }, { label: "Automation", value: "automation" }];
+
+      const byId = (id) => document.getElementById(id);
+      const option = (text) => `<option>${text}</option>`;
+
+      byId("miniCourses").innerHTML = courses.slice(0, 4).map((course) => `<div class="mini-course"><p>${course.title}</p><span>${course.duration}</span></div>`).join("");
+      byId("languages").innerHTML = site.languages.map((language) => `<span>${language}</span>`).join("");
+      byId("courseGrid").innerHTML = courses.map((course) => `<article class="course-card"><div><h3>${course.title}</h3><span>${course.duration}</span></div><p>${course.summary}</p></article>`).join("");
+      byId("serviceList").innerHTML = services.map((service) => `<div>${service}</div>`).join("");
+      byId("contactCourse").innerHTML = courses.map((course) => option(course.title)).join("");
+      byId("waCourse").innerHTML = courses.map((course) => option(course.title)).join("");
+      byId("waLanguage").innerHTML = site.languages.map(option).join("");
+
+      function setRecommended(goal) {
+        const selected = courses.find((course) => course.goal === goal) || courses[0];
+        byId("recommendedTitle").textContent = selected.title;
+        byId("recommendedSummary").textContent = selected.summary;
+        byId("recommendedLevel").textContent = selected.level;
+        byId("recommendedDuration").textContent = selected.duration;
+        document.querySelectorAll(".goal-tabs button").forEach((button) => button.classList.toggle("active", button.dataset.goal === goal));
+      }
+
+      byId("goalTabs").innerHTML = goals.map((goal) => `<button type="button" data-goal="${goal.value}">${goal.label}</button>`).join("");
+      byId("goalTabs").addEventListener("click", (event) => {
+        if (event.target.dataset.goal) setRecommended(event.target.dataset.goal);
+      });
+      setRecommended("career");
+
+      function updateMailLink() {
+        const subject = `Admission inquiry for ${byId("contactCourse").value}`;
+        const body = [
+          `Name: ${byId("contactName").value}`,
+          `Email: ${byId("contactEmail").value}`,
+          `Course: ${byId("contactCourse").value}`,
+          "",
+          byId("contactMessage").value || "I want course details and admission information.",
+        ].join("\n");
+        byId("mailButton").href = `mailto:${site.adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      }
+
+      function updateWhatsappLink() {
+        const text = [
+          `Name: ${byId("waName").value || "New student"}`,
+          `Course: ${byId("waCourse").value}`,
+          `Language: ${byId("waLanguage").value}`,
+          "",
+          byId("waMessage").value,
+        ].join("\n");
+        byId("whatsappButton").href = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(text)}`;
+      }
+
+      ["contactName", "contactEmail", "contactCourse", "contactMessage"].forEach((id) => byId(id).addEventListener("input", updateMailLink));
+      ["waName", "waCourse", "waLanguage", "waMessage"].forEach((id) => byId(id).addEventListener("input", updateWhatsappLink));
+      updateMailLink();
+      updateWhatsappLink();
+    </script>
+  </body>
+</html>
